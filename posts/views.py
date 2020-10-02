@@ -30,7 +30,7 @@ class PostDetail(DetailView):
 
 class PostCreate(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ["title", "link", "text"]  # add "tags"
+    fields = ["title", "link", "text", "tags"]
     template_name = "posts/post_create.html"
 
     def form_valid(self, form):
@@ -40,7 +40,7 @@ class PostCreate(LoginRequiredMixin, CreateView):
 
 class PostUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ["title", "link", "text"]  # add "tags"
+    fields = ["title", "link", "text", "tags"]
     template_name = "posts/post_update.html"
 
     def form_valid(self, form):

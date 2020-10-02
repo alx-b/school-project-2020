@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.urls import reverse
 from django.contrib.auth.models import User
 
+from tags.models import Tag
 
 # Create your models here.
 class Post(models.Model):
@@ -10,7 +11,7 @@ class Post(models.Model):
     link = models.URLField(max_length=300)
     text = models.TextField(max_length=3000)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    # tags =
+    tags = models.ManyToManyField(Tag)
     date_posted = models.DateTimeField(default=timezone.now)
     last_updated = models.DateTimeField(null=True)
 

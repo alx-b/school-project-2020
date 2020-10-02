@@ -3,7 +3,6 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
 from .forms import RegisterForm
-from .models import User
 
 # Create your views here.
 class RegisterView(CreateView):
