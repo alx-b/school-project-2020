@@ -1,21 +1,31 @@
-{% extends "base.html" %}
+{% extends "posts/base.html" %}
 {% load static %}
 
 {% block content %}
-<h1>Posts</h1>
+<div class="page-buttons-bar">
+    <h1>Posts</h1>
+    {% if user.is_authenticated %}
+    <a class="buttons" href="{% url 'posts:post-create' %}">Create a post</a>
+    {% endif %}
+</div>
 {% for post in object_list %}
 <div class="post">
-  <a href="{% url 'posts:post' pk=post.pk %}">{{ post.title }}</a>
-    <div class="post-footer">Posted {{post.date_posted}} by {{ post.user }}
-    {% if post.last_updated %}
-    (updated {{post.last_updated}})
-    {% endif %}
+    <div class="post-title">
+        <a href="{% url 'posts:post' pk=post.pk %}">{{ post.title }}</a>
     </div>
-    <div class="post-footer">
+    <footer class="post-footer">
+        <div class="temp">
+            Posted {{post.date_posted}} by {{ post.user }}
+            {% if post.last_updated %}
+                (updated {{post.last_updated}})
+            {% endif %}
+        </div>
+        <div class="post-tags">
         {% for tag_name in post.tags.all %}
-        <a href="{% url 'tags:tag' name=tag_name %}">#{{tag_name}}</a>
-        {% endfor %}
-    </div>
+            <a href="{% url 'tags:tag' name=tag_name %}">#{{tag_name}}</a>
+            {% endfor %}
+        </div>
+    </footer>
 </div>
 
 {% empty %}

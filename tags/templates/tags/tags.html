@@ -1,15 +1,31 @@
-{% extends "base.html" %}
+{% extends "tags/base.html" %}
 {% load static %}
 
 {% block content %}
-    <h1>Tags</h1>
+    <div class="page-buttons-bar">
+        <h1>Tags</h1>
+        {% if user.is_authenticated %}
+        <a class="buttons" href="{% url 'tags:tag-create' %}">Create a tag</a>
+        {% endif %}
+    </div>
+    <div class="tag-container">
     {% for tag in object_list %}
-        <div class="container">
+        <div class="tag">
             <a href="{% url 'tags:tag' name=tag.name %}">{{ tag.name }}</a>
         </div>
-
     {% empty %}
         <h2>No tag yet!</h2>
-    {% endfor %}
+        {% endfor %}
+    </div>
 
 {% endblock %}
+
+
+
+
+
+
+
+
+
+        

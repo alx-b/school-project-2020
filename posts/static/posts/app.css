@@ -1,0 +1,44 @@
+.post {
+    background-color: #222;
+    border-radius: 6px;
+    //border: 4px solid #999;
+}
+
+.post-title {
+    margin: 10px 10px 0px 10px;
+    //border: 4px solid #999;
+}
+
+.post-title > a {
+    text-decoration: 0;
+    color: #d55;
+}
+
+.post-title > a:hover {
+    text-decoration: underline;
+}
+
+.post-text {
+    margin: 10px;
+}
+
+.post-footer {
+    display: grid;
+    font-size: 12px;
+    margin: 10px;
+    //border: 4px solid #999;
+}
+
+.post-footer > .buttons {
+    background-color: #222;
+}
+
+.post-tags > a {
+    text-decoration: 0;
+    color: #d55;
+}
+
+.post-tags > a:hover {
+    text-decoration: underline;
+}
+

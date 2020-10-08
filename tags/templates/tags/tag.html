@@ -1,20 +1,39 @@
-{% extends "base.html" %}
+{% extends "tags/base.html" %}
 {% load static %}
 
 {% block content %}
-<h1>Tag</h1>
-<div class="container">
-    <div>{{tag.name}}</div>
-    <div>{{tag.text}}</div>
-    {% if user.is_authenticated %}
-    <div>
-        <a class="buttons" href="{% url 'tags:tag-update' name=tag.name %}">Update</a>
-        <a class="buttons" href="{% url 'tags:tag-delete' name=tag.name %}">Delete</a>
+<div class="tag-page-container">
+    <sidebar>
+        <h1>{{tag.name}}</h1>
+        <p>{{tag.text}}</p>
+        {% if user.is_authenticated %}
+        <div>
+            <a class="buttons" href="{% url 'tags:tag-update' name=tag.name %}">Update</a>
+            <a class="buttons" href="{% url 'tags:tag-delete' name=tag.name %}">Delete</a>
+        </div>
+        {% endif %}
+    </sidebar>
+    <div class="post-section">
+        {% for post in some_data %}
+            <div class="post">
+                <div class="post-title">
+                    <a href="{% url 'posts:post' pk=post.pk %}">{{ post.title }}</a>
+                </div>
+                <footer class="post-footer">
+                    <div class="temp">
+                        Posted {{post.date_posted}} by {{ post.user }}
+                        {% if post.last_updated %}
+                            (updated {{post.last_updated}})
+                        {% endif %}
+                    </div>
+                    <div class="post-tags">
+                    {% for tag_name in post.tags.all %}
+                        <a href="{% url 'tags:tag' name=tag_name %}">#{{tag_name}}</a>
+                        {% endfor %}
+                    </div>
+                </footer>
+            </div>
+        {% endfor %}
     </div>
-    {% endif %}
-    {% for post in some_data %}
-        {{post.title}}
-    {% endfor %}
-    
 </div>
 {% endblock %}
