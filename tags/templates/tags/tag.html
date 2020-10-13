@@ -10,6 +10,12 @@
         <div>
             <a class="buttons" href="{% url 'tags:tag-update' name=tag.name %}">Update</a>
             <a class="buttons" href="{% url 'tags:tag-delete' name=tag.name %}">Delete</a>
+
+            <form action="{% url 'tags:add-follower' name=tag.name %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" class="buttons" value="Follow">
+            </form>
+
         </div>
         {% endif %}
     </sidebar>

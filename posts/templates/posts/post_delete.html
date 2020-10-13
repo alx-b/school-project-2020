@@ -2,11 +2,19 @@
 {% load static %}
 
 {% block content %}
+
+<div class="page-buttons-bar">
 <h1>Delete Post</h1>
-<form method="post">
-  {% csrf_token %}
-  {{ form }}
-  <input class="delete-button" type="submit" value="Delete">
-  <a class="buttons" href="{% url 'posts:post' pk=post.pk %}">Cancel</a>
-</form>
+</div>
+
+<div class="form-container">
+  <form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <div class="post-buttons">
+      <input class="delete-button" type="submit" value="Delete">
+      <a class="buttons" href="{% url 'posts:post' pk=post.pk %}">Cancel</a>
+    </div>
+  </form>
+</div>
 {% endblock %}

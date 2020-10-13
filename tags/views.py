@@ -1,11 +1,12 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView
+from django.views.generic import ListView, View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Tag
 from posts.models import Post
+from django.contrib.auth import models as auth_models
 
 # Create your views here.
 
@@ -33,6 +34,15 @@ class TagDetail(DetailView):
     def get_object(self):
         object = get_object_or_404(Tag, name=self.kwargs["name"])
         return object
+
+
+def add_user_to_followers(request, name, **kwargs):
+    user = get_object_or_404(auth_models.User)
+    tag = get_object_or_404(Tag, name=name)
+    if request.method == "POST":
+        tag.followers.add(user)
+        return redirect("tags:tag", name=tag.name)
+    return redirect("tags:tag", name=tag.name)
 
 
 class TagCreate(LoginRequiredMixin, CreateView):

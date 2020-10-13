@@ -2,10 +2,15 @@
 {% load static %}
 
 {% block content %}
+
+<div class="page-buttons-bar">
 <h1>Add new tag</h1>
+</div>
+<div class="form-container">
 <form method="post">
   {% csrf_token %}
   {{ form }}
   <input class="buttons" type="submit" value="Add new tag">
 </form>
+</div>
 {% endblock %}

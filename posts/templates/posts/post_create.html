@@ -2,10 +2,17 @@
 {% load static %}
 
 {% block content %}
-<h1>Compose Post</h1>
-<form method="post">
-  {% csrf_token %}
-  {{ form }}
-  <input class="buttons" type="submit" value="Post">
-</form>
+
+<div class="page-buttons-bar">
+  <h1>Compose Post</h1>
+</div>
+
+<div class="form-container">
+  <form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input class="buttons" type="submit" value="Post">
+  </form>
+</div>
+
 {% endblock %}
