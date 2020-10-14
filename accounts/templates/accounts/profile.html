@@ -2,39 +2,44 @@
 {% load static %}
 
 {% block content %}
-<h1>Profile</h1>
-<div>
-  {% for tag in followed_tags %}
-    <div>
-      {{tag.name}}
-    </div>
-    {% endfor %}
-
-    {% for post in posts %}
-        <div class="post">
-            <div class="post-title">
-                <a href="{% url 'posts:post' pk=post.pk %}">{{ post.title }}</a>
+<div class="profile-page-container">
+    <sidebar>
+        <h1>user name</h1>
+        <p>user description</p>
+        {% if user.is_authenticated %}
+            <div>
+                {% for tag in followed_tags %}
+                    <div>
+                        {{tag.name}}
+                    </div>
+                {% endfor %}
             </div>
-            <footer class="post-footer">
-                <div class="temp">
-                    Posted {{post.date_posted}} by {{ post.user }}
-                    {% if post.last_updated %}
-                        (updated {{post.last_updated}})
-                    {% endif %}
+        {% endif %}
+    </sidebar>
+    <div class="post-section">
+        {% for post in posts %}
+            <div class="post">
+                <div class="post-title">
+                    <a href="{% url 'posts:post' pk=post.pk %}">{{ post.title }}</a>
                 </div>
-                <div class="post-tags">
-                {% for tag_name in post.tags.all %}
-                    <a href="{% url 'tags:tag' name=tag_name %}">#{{tag_name}}</a>
-                    {% endfor %}
-                </div>
-            </footer>
-        </div>
+                <footer class="post-footer">
+                    <div class="temp">
+                        Posted {{post.date_posted}} by {{ post.user }}
+                        {% if post.last_updated %}
+                            (updated {{post.last_updated}})
+                        {% endif %}
+                    </div>
+                    <div class="post-tags">
+                    {% for tag_name in post.tags.all %}
+                        <a href="{% url 'tags:tag' name=tag_name %}">#{{tag_name}}</a>
+                        {% endfor %}
+                    </div>
+                </footer>
+            </div>
 
-        {% empty %}
-        <h2>No post yet!</h2>
-    {% endfor %}
-
-
-
+            {% empty %}
+            <h2>No post yet!</h2>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
