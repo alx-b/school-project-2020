@@ -36,4 +36,5 @@ class ProfileView(LoginRequiredMixin, UserPassesTestMixin, ListView):
         context["followed_tags"] = Tag.objects.filter(followers__id=user.id)
         tags_name = [tag.name for tag in context["followed_tags"]]
         context["posts"] = Post.objects.filter(tags__name__in=tags_name)
+        context["user"] = user
         return context

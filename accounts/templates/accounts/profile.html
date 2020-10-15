@@ -4,17 +4,16 @@
 {% block content %}
 <div class="profile-page-container">
     <sidebar>
-        <h1>user name</h1>
+        <h1>{{user.username}}</h1>
         <p>user description</p>
-        {% if user.is_authenticated %}
-            <div>
-                {% for tag in followed_tags %}
-                    <div>
-                        {{tag.name}}
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
+        <h3>Tag followed</h3>
+        <div class="tag-list">
+            {% for tag in followed_tags %}
+                <div class="tag">
+                    <a href="{% url 'tags:tag' name=tag.name %}">{{tag.name}}</a>
+                </div>
+            {% endfor %}
+        </div>
     </sidebar>
     <div class="post-section">
         {% for post in posts %}

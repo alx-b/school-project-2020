@@ -3,18 +3,34 @@
 
 {% block content %}
 
-<div class="page-buttons-bar">
-<h1>Delete Post</h1>
-</div>
-
 <div class="form-container">
-  <form method="post">
+  <form class="del-form" method="post" action="{% url 'posts:post-delete' pk=post.pk %}">
     {% csrf_token %}
     {{ form }}
     <div class="post-buttons">
-      <input class="delete-button" type="submit" value="Delete">
-      <a class="buttons" href="{% url 'posts:post' pk=post.pk %}">Cancel</a>
+      <input class="delete-button" value="Delete">
+      <button class="cancel-button" type="button">Cancel</button>
     </div>
   </form>
 </div>
+
+<script>
+  someContainer = document.querySelector(".post-del-container");
+  delForm = document.querySelector(".del-form");
+
+    deleteButton = document.querySelector(".delete-button");
+    cancelButton = document.querySelector(".cancel-button");
+
+    deleteButton.addEventListener("click", submitForm);
+    cancelButton.addEventListener("click", hideHTML);
+
+    function hideHTML(){
+        someContainer.style.display = "none";
+    }
+
+    function submitForm(){
+        delForm.submit();
+    }
+</script>
+
 {% endblock %}

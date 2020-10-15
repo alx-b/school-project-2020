@@ -30,8 +30,25 @@
     <div class="post-buttons">
         {% if object.user == user %}
             <a class="buttons" href="{% url 'posts:post-update' pk=post.pk %}">Update</a>
-            <a class="buttons" href="{% url 'posts:post-delete' pk=post.pk %}">Delete</a>
+            <button type="button" class="del-button">Delete</button>
         {% endif %}
     </div>
+    <div class="post-del-container">
+        {% include 'posts/post_delete.html' %}
+    </div>
 </div>
+
+
+<script>
+    someContainer = document.querySelector(".post-del-container");
+    someContainer.style.display = "none";
+
+    delButton = document.querySelector(".del-button");
+    delButton.addEventListener("click", showHTML);
+
+    function showHTML(){
+        someContainer.style.display = "grid";
+    }
+</script>
+
 {% endblock %}
