@@ -45,6 +45,15 @@ def add_user_to_followers(request, name, **kwargs):
     return redirect("tags:tag", name=tag.name)
 
 
+def remove_user_from_followers(request, name, **kwargs):
+    user = get_object_or_404(auth_models.User)
+    tag = get_object_or_404(Tag, name=name)
+    if request.method == "POST":
+        tag.followers.remove(user)
+        return redirect("tags:tag", name=tag.name)
+    return redirect("tags:tag", name=tag.name)
+
+
 class TagCreate(LoginRequiredMixin, CreateView):
     model = Tag
     fields = ["name", "text"]

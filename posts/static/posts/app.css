@@ -33,6 +33,20 @@
     background-color: #222;
 }
 
+.del-button {
+    background-color: #222;
+    color: blue;
+    border: 1px solid blue;
+    border-radius: 6px;
+    padding: 6px;
+    cursor: pointer;
+}
+
+.del-button:hover {
+    background-color: blue;
+    color: white;
+}
+
 .post-tags > a {
     text-decoration: 0;
     color: #d55;
