@@ -6,7 +6,7 @@ from django.urls import reverse
 class Tag(models.Model):
     name = models.CharField(max_length=100)
     text = models.CharField(max_length=3000)
-    followers = models.ManyToManyField(User)
+    followers = models.ManyToManyField(User, related_name="user_follower")
 
     def get_absolute_url(self):
         return reverse("tags:tag", kwargs={"name": self.name})

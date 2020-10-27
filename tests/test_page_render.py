@@ -6,7 +6,7 @@ from posts.models import Post
 from tags.models import Tag
 
 # FIXTURES -------------------------------------------------------
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="session")
 def django_db_setup(django_db_setup, django_db_blocker):
     print("setup")
     with django_db_blocker.unblock():
@@ -67,8 +67,8 @@ def test_page_expected_html_status_code_with_visitor(
     "page, expected_status_code",
     [
         # Default register/login accessible to auth user??
-        ("accounts:register", 302),
-        ("accounts:login", 302),
+        ("accounts:register", 200),
+        ("accounts:login", 200),
         ("accounts:logout", 200),
         ("accounts:profile", 200),
         ("posts:posts", 200),
