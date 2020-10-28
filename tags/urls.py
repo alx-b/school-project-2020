@@ -8,6 +8,7 @@ from .views import (
     TagUpdate,
     add_user_to_followers,
     remove_user_from_followers,
+    add_user_to_moderators,
 )
 
 app_name = "tags"
@@ -24,4 +25,12 @@ urlpatterns = [
     path("<slug:name>/", TagDetail.as_view(), name="tag"),
     path("<slug:name>/update/", TagUpdate.as_view(), name="tag-update"),
     path("<slug:name>/delete/", TagDelete.as_view(), name="tag-delete"),
+    path(
+        "<slug:name>/add_moderator/",
+        add_user_to_moderators,
+        name="add-moderator",
+    ),
+    path(
+        "<slug:name>/remove_moderator/", add_user_to_moderators, name="remove-moderator"
+    ),
 ]

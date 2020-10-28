@@ -23,6 +23,10 @@
             {% endif %}
         </div>
         {% endif %}
+        <div>
+            <h3>Moderators</h3>
+            <a class="buttons" href="{% url 'tags:add-moderator' name=tag.name %}">Add Moderator</a>
+        </div>
     </sidebar>
     <div class="post-section">
         {% for post in some_data %}
