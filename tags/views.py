@@ -5,6 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Tag
+from .forms import AddModeratorForm
 from posts.models import Post
 from django.contrib.auth import models as auth_models
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -60,12 +61,17 @@ def add_user_to_moderators(request, name, **kwargs):
     tag = get_object_or_404(Tag, name=name)
     if request.user in tag.moderators.all():
         if request.method == "POST":
-            # user = auth_models.User.objects.filter(username=username)
-            # if user:
-            #    tag.moderators.add(user)
-            #    return redirect("tags:tag", name=tag.name)
-            return redirect("tags:tag", name=tag.name)
-        return render(request, "tags/moderator_create.html")
+            form = AddModeratorForm(request.POST)
+            print("USER", form["username"])
+            if form.is_valid():
+                username = form.cleaned_data["username"]
+                user = auth_models.User.objects.get(username=username)
+                if user:
+                    tag.moderators.add(user)
+                    return redirect("tags:tag", name=tag.name)
+                return redirect("tags:tag", name=tag.name)
+        form = AddModeratorForm()
+        return render(request, "tags/moderator_create.html", {"form": form})
     else:
         return redirect("tags:tag", name=tag.name)
 
