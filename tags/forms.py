@@ -1,5 +1,5 @@
 from django import forms
 
 
-class AddModeratorForm(forms.Form):
-    username = forms.CharField(label="user to add", max_length=100)
+class ModeratorForm(forms.Form):
+    username = forms.CharField(label="user to add or remove", max_length=100)

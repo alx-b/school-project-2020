@@ -1,0 +1,18 @@
+{% extends "posts/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="page-buttons-bar">
+  <h1>Remove Tags</h1>
+</div>
+
+<div class="form-container">
+  <form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input class="buttons" type="submit" value="Remove">
+  </form>
+</div>
+
+{% endblock %}

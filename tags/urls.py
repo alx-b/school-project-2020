@@ -9,6 +9,7 @@ from .views import (
     add_user_to_followers,
     remove_user_from_followers,
     add_user_to_moderators,
+    remove_user_from_moderators,
 )
 
 app_name = "tags"
@@ -31,6 +32,8 @@ urlpatterns = [
         name="add-moderator",
     ),
     path(
-        "<slug:name>/remove_moderator/", add_user_to_moderators, name="remove-moderator"
+        "<slug:name>/remove_moderator/",
+        remove_user_from_moderators,
+        name="remove-moderator",
     ),
 ]

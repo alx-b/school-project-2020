@@ -8,8 +8,10 @@
         <p>{{tag.text}}</p>
         {% if user.is_authenticated %}
         <div>
+            {% if user in tag.moderators.all %}
             <a class="buttons" href="{% url 'tags:tag-update' name=tag.name %}">Update</a>
             <a class="buttons" href="{% url 'tags:tag-delete' name=tag.name %}">Delete</a>
+            {% endif %}
             {% if user in tag.followers.all %}
                 <input type="submit" class="buttons" value="Unfollow" form="link-with-input2">
                 <form id="link-with-input2" action="{% url 'tags:remove-follower' name=tag.name %}" method="POST">
@@ -23,9 +25,18 @@
             {% endif %}
         </div>
         {% endif %}
-        <div>
-            <h3>Moderators</h3>
-            <a class="buttons" href="{% url 'tags:add-moderator' name=tag.name %}">Add Moderator</a>
+        <h3>Moderators</h3>
+
+        {% if user in tag.moderators.all %}
+        <a class="buttons" href="{% url 'tags:add-moderator' name=tag.name %}">Add Moderator</a>
+        <a class="buttons" href="{% url 'tags:remove-moderator' name=tag.name %}">Remove Moderator</a>
+        {% endif %}
+        <div class="list-moderators">
+            {% for moderator in tag.moderators.all %}
+                <div class="moderator">
+                    {{moderator.username}}
+                </div>
+            {% endfor %}
         </div>
     </sidebar>
     <div class="post-section">

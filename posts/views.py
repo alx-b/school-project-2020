@@ -1,13 +1,55 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from .models import Post
+from tags.models import Tag
+from .forms import TagSelectForm
 
 # Create your views here.
+
+
+@login_required
+def mod_add_tag_to_post(request, **kwargs):
+    mod_tags = Tag.objects.filter(moderators=request.user.id)
+    post = get_object_or_404(Post, id=kwargs["pk"])
+    choices = [(tag.name, tag.name) for tag in mod_tags]
+    if request.method == "POST":
+        form = TagSelectForm(choices, request.POST)
+        if form.is_valid():
+            tag_names = form.cleaned_data["names"]
+            query = Tag.objects.filter(name__in=tag_names)
+            for tag in query:
+                post.tags.add(tag)
+            return redirect("posts:post", pk=post.id)
+        messages.error(request, "Form is not valid.")
+        return render(request, "posts/moderator_tag_add.html", {"form": form})
+    form = TagSelectForm(choices)
+    return render(request, "posts/moderator_tag_add.html", {"form": form})
+
+
+@login_required
+def mod_remove_tag_from_post(request, **kwargs):
+    mod_tags = Tag.objects.filter(moderators=request.user.id)
+    post = get_object_or_404(Post, id=kwargs["pk"])
+    choices = [(tag.name, tag.name) for tag in mod_tags]
+    if request.method == "POST":
+        form = TagSelectForm(choices, request.POST)
+        if form.is_valid():
+            tag_names = form.cleaned_data["names"]
+            query = Tag.objects.filter(name__in=tag_names)
+            for tag in query:
+                post.tags.remove(tag)
+            return redirect("posts:post", pk=post.id)
+        messages.error(request, "Form is not valid.")
+        return render(request, "posts/moderator_tag_remove.html", {"form": form})
+    form = TagSelectForm(choices)
+    return render(request, "posts/moderator_tag_remove.html", {"form": form})
 
 
 class PostList(ListView):

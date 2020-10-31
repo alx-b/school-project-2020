@@ -1,0 +1,16 @@
+{% extends "tags/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="page-buttons-bar">
+<h1>Remove a moderator</h1>
+</div>
+<div class="form-container">
+<form method="post">
+  {% csrf_token %}
+  {{ form }}
+  <input class="buttons" type="submit" value="Remove moderator">
+</form>
+</div>
+{% endblock %}

@@ -35,6 +35,8 @@
     grid-template-columns: 1fr 4fr;
 }
 .tag-page-container > sidebar {
+    display: grid;
+    grid-gap: 6px;
     background-color: #222;
     border-radius: 6px;
 }
@@ -86,4 +88,13 @@
 
 .post-tags > a:hover {
     text-decoration: underline;
+}
+
+.list-moderators {
+    display: grid;
+    grid-gap: 6px;
+}
+
+.moderator {
+    
 }
