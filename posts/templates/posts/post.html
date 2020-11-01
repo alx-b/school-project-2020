@@ -32,8 +32,13 @@
             <a class="buttons" href="{% url 'posts:post-update' pk=post.pk %}">Update</a>
             <button type="button" class="post-delete-button">Delete</button>
         {% endif %}
+        {% if user.is_authenticated and moderator %}
+            <a class="buttons" href="{% url 'posts:mod-tag-add' pk=post.pk %}">Add Tag</a>
+            <a class="buttons" href="{% url 'posts:mod-tag-remove' pk=post.pk %}">Remove Tag</a>
+        {% endif %}
+            
     </div>
-    <div class="post-del-container">
+    <div class="post-del-container" hidden>
         {% include 'posts/post_delete.html' %}
     </div>
 </div>
