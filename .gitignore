@@ -1,4 +1,4 @@
-/project/*
+/app/*
 __init__.py
 *__pycache__*
 *.sqlite3
