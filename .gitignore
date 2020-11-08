@@ -3,6 +3,7 @@ __init__.py
 *.sqlite3
 *~
 .*
+.gitignore
 /app/statics/
 /nginx/
 Dockerfile
