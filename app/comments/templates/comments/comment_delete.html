@@ -1,0 +1,16 @@
+{% load static %}
+
+<form
+  class="delete-form"
+  method="post"
+  action="{% url 'comments:comment-delete' pk=comment.pk %}"
+>
+  {% csrf_token %}
+  {{ form }}
+  <div class="form-buttons">
+    <input class="form-delete-button" value="Delete" type="submit">
+    <button class="form-cancel-button" type="button">Cancel</button>
+  </div>
+</form>
+
+<script src="{% static 'comments/comment_delete.js' %}"></script>

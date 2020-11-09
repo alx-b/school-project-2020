@@ -42,6 +42,23 @@
         {% include 'posts/post_delete.html' %}
     </div>
 </div>
+<div class="comment-list">
+    {% for comment in comments %}
+        <div class="comment-text">
+            <p>{{comment.text}}</p>
+        </div>
+
+        <footer class="comment-footer">
+            <div class="temp">
+                Posted {{comment.date_posted}} by {{ comment.user }}
+                {% if comment.last_updated %}
+                    (updated {{comment.last_updated}})
+                {% endif %}
+            </div>
+        </footer>
+            
+    {% endfor %}
+</div>
 
 
 <script src="{% static 'posts/post.js' %}"></script>

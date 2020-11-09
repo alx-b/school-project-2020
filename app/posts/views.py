@@ -9,6 +9,7 @@ from django.contrib import messages
 
 from .models import Post
 from tags.models import Tag
+from comments.models import Comment
 from .forms import TagSelectForm
 
 # Create your views here.
@@ -69,6 +70,7 @@ class PostDetail(DetailView):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
             context["moderator"] = Tag.objects.filter(moderators=self.request.user)
+        context["comments"] = Comment.objects.filter(post=self.kwargs["pk"])
         return context
 
 

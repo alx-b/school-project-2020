@@ -1,0 +1,17 @@
+{% extends "comments/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="page-buttons-bar">
+<h1>Update Comment</h1>
+</div>
+
+<div class="form-container">
+<form method="post">
+  {% csrf_token %}
+  {{ form }}
+  <input class="buttons" type="submit" value="Comment">
+</form>
+</div>
+{% endblock %}
