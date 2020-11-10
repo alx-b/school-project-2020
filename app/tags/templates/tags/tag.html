@@ -40,26 +40,47 @@
         </div>
     </sidebar>
     <div class="post-section">
-        {% for post in some_data %}
-            <div class="post">
-                <div class="post-title">
-                    <a href="{% url 'posts:post' pk=post.pk %}">{{ post.title }}</a>
+
+            {% for post in page_object %}
+                <div class="post">
+                    <div class="post-title">
+                        <a href="{% url 'posts:post' pk=post.pk %}">{{ post.title }}</a>
+                    </div>
+                    <footer class="post-footer">
+                        <div class="temp">
+                            Posted {{post.date_posted}} by {{ post.user }}
+                            {% if post.last_updated %}
+                                (updated {{post.last_updated}})
+                            {% endif %}
+                        </div>
+                        <div class="post-tags">
+                        {% for tag_name in post.tags.all %}
+                            <a href="{% url 'tags:tag' name=tag_name %}">#{{tag_name}}</a>
+                            {% endfor %}
+                        </div>
+                    </footer>
                 </div>
-                <footer class="post-footer">
-                    <div class="temp">
-                        Posted {{post.date_posted}} by {{ post.user }}
-                        {% if post.last_updated %}
-                            (updated {{post.last_updated}})
-                        {% endif %}
-                    </div>
-                    <div class="post-tags">
-                    {% for tag_name in post.tags.all %}
-                        <a href="{% url 'tags:tag' name=tag_name %}">#{{tag_name}}</a>
-                        {% endfor %}
-                    </div>
-                </footer>
+            {% endfor %}
+
+
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_object.has_previous %}
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page={{ page_object.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ page_object.number }} of {{ page_object.paginator.num_pages }}.
+                    </span>
+
+                    {% if page_object.has_next %}
+                        <a href="?page={{ page_object.next_page_number }}">next</a>
+                        <a href="?page={{ page_object.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
             </div>
-        {% endfor %}
+            
     </div>
 </div>
 {% endblock %}

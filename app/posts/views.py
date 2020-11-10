@@ -6,6 +6,7 @@ from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 from .models import Post
 from tags.models import Tag
@@ -56,6 +57,8 @@ def mod_remove_tag_from_post(request, **kwargs):
 class PostList(ListView):
     model = Post
     template_name = "posts/posts.html"
+    paginate_by = 2
+    ordering = ["-date_posted"]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -70,7 +73,14 @@ class PostDetail(DetailView):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
             context["moderator"] = Tag.objects.filter(moderators=self.request.user)
-        context["comments"] = Comment.objects.filter(post=self.kwargs["pk"])
+        comments = Comment.objects.filter(post=self.kwargs["pk"]).order_by(
+            "-date_posted"
+        )
+
+        paginator = Paginator(comments, 2)
+        page_number = self.request.GET.get("page")
+        context["page_object"] = paginator.get_page(page_number)
+
         return context
 
 

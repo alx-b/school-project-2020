@@ -5,6 +5,8 @@ from django.views.generic import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import models as auth_models
 from django.shortcuts import get_object_or_404
+from django.db.models import Count
+from django.core.paginator import Paginator
 
 from .forms import RegisterForm
 from tags.models import Tag
@@ -31,6 +33,14 @@ class ProfileView(LoginRequiredMixin, UserPassesTestMixin, ListView):
         user = self.request.user
         context["followed_tags"] = Tag.objects.filter(followers__id=user.id)
         tags_name = [tag.name for tag in context["followed_tags"]]
-        context["posts"] = Post.objects.filter(tags__name__in=tags_name)
+        posts = (
+            Post.objects.filter(tags__name__in=tags_name)
+            .annotate(Count("id"))
+            .order_by("-date_posted")
+        )
+
+        paginator = Paginator(posts, 2)
+        page_number = self.request.GET.get("page")
+        context["page_object"] = paginator.get_page(page_number)
         context["user"] = user
         return context

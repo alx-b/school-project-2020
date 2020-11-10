@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import models as auth_models
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 from .models import Tag
 from .forms import ModeratorForm
@@ -31,8 +32,13 @@ class TagDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        some_data = Post.objects.filter(tags__name=self.kwargs["name"])
-        context.update({"some_data": some_data})
+        posts = Post.objects.filter(tags__name=self.kwargs["name"]).order_by(
+            "-date_posted"
+        )
+        paginator = Paginator(posts, 2)
+        page_number = self.request.GET.get("page")
+        page_object = paginator.get_page(page_number)
+        context.update({"page_object": page_object})
         return context
 
     def get_object(self):

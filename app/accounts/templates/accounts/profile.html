@@ -16,7 +16,7 @@
         </div>
     </sidebar>
     <div class="post-section">
-        {% for post in posts %}
+        {% for post in page_object %}
             <div class="post">
                 <div class="post-title">
                     <a href="{% url 'posts:post' pk=post.pk %}">{{ post.title }}</a>
@@ -38,7 +38,30 @@
 
             {% empty %}
             <h2>No post yet!</h2>
-        {% endfor %}
+            {% endfor %}
+
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_object.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_object.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ page_object.number }} of {{ page_object.paginator.num_pages }}.
+                </span>
+
+                {% if page_object.has_next %}
+                    <a href="?page={{ page_object.next_page_number }}">next</a>
+                    <a href="?page={{ page_object.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+
+
     </div>
+
+
 </div>
 {% endblock %}

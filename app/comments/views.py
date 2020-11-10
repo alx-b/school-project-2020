@@ -15,6 +15,8 @@ from posts.models import Post
 class CommentList(ListView):
     model = Comment
     template_name = "comments/comments.html"
+    paginate_by = 2
+    ordering = ["-date_posted"]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -36,6 +38,12 @@ class CommentCreate(LoginRequiredMixin, CreateView):
     model = Comment
     fields = ["text"]
     template_name = "comments/comment_create.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            context["post"] = Post.objects.get(pk=self.kwargs["pk"])
+        return context
 
     def form_valid(self, form):
         form.instance.user = self.request.user
