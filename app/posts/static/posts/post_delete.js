@@ -1,18 +1,18 @@
-container = document.querySelector(".post-del-container");
-deleteForm = document.querySelector(".delete-form");
+containerPost = document.querySelector(".post-del-container");
+deletePostForm = document.querySelector(".delete-form");
 
-deleteButton = document.querySelector(".form-delete-button");
-cancelButton = document.querySelector(".form-cancel-button");
+deletePostButton = document.querySelector(".form-delete-button");
+cancelPostButton = document.querySelector(".form-cancel-button");
 
-deleteButton.addEventListener("click", submitForm);
-cancelButton.addEventListener("click", hideHTML);
+deletePostButton.addEventListener("click", submitForm);
+cancelPostButton.addEventListener("click", hidePostHTML);
 
-function hideHTML(){
-    container.style.display = "none";
+function hidePostHTML(){
+    containerPost.style.display = "none";
 }
 
 function submitForm(){
-    deleteForm.submit();
+    deletePostForm.submit();
 }
 
 

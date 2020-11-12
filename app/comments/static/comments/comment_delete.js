@@ -1,18 +1,20 @@
-container = document.querySelector(".comment-del-container");
-deleteForm = document.querySelector(".delete-form");
+//containerComment = document.querySelector(".comment-del-container");
 
-deleteButton = document.querySelector(".form-delete-button");
-cancelButton = document.querySelector(".form-cancel-button");
+deleteCommentForm = document.querySelector(".comment-delete-form");
+deleteCommentButton = document.querySelector(".comment-form-delete-button");
 
-deleteButton.addEventListener("click", submitForm);
-cancelButton.addEventListener("click", hideHTML);
+//cancelCommentButton = document.querySelector(".comment-form-cancel-button");
 
-function hideHTML(){
-    container.style.display = "none";
-}
 
-function submitForm(){
-    deleteForm.submit();
+deleteCommentButton.addEventListener("click", submitCommentForm);
+
+//function hideCommentHTML(event){
+//    console.log("HIDE?");
+//    containerComments[event.currentTarget].style.display = "none";
+//}
+
+function submitCommentForm(){
+    deleteCommentForm.submit();
 }
 
 

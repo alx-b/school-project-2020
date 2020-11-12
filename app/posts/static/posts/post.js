@@ -1,9 +1,9 @@
-    container = document.querySelector(".post-del-container");
-    container.style.display = "none";
+    containerP = document.querySelector(".post-del-container");
+    containerP.style.display = "none";
 
     delButton = document.querySelector(".post-delete-button");
-    delButton.addEventListener("click", showHTML);
+    delButton.addEventListener("click", showPostHTML);
 
-    function showHTML(){
-        container.style.display = "grid";
+    function showPostHTML(){
+        containerP.style.display = "grid";
     }

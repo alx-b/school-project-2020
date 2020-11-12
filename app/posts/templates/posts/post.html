@@ -67,6 +67,9 @@
             {% if comment.user == user %}
                 <a class="buttons" href="{% url 'comments:comment-update' pk=comment.pk %}">Update</a>
                 <button type="button" class="comment-delete-button">Delete</button>
+                    <div class="comment-del-container" hidden>
+                        {% include 'comments/comment_delete.html' %}
+                    </div>
             {% endif %}
             </div>
         </footer>
@@ -97,5 +100,5 @@
 
 
 <script src="{% static 'posts/post.js' %}"></script>
-
+<script src="{% static 'comments/comment.js' %}"></script>
 {% endblock %}
