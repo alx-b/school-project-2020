@@ -10,12 +10,20 @@ from .views import (
     remove_user_from_followers,
     add_user_to_moderators,
     remove_user_from_moderators,
+    TagListOrderByFollowers,
+    TagListOrderByPosts,
 )
 
 app_name = "tags"
 
 urlpatterns = [
     path("", TagList.as_view(), name="tags"),
+    path(
+        "order_by_followers/",
+        TagListOrderByFollowers.as_view(),
+        name="tags-order-followers",
+    ),
+    path("order_by_posts/", TagListOrderByPosts.as_view(), name="tags-order-posts"),
     path("create/", TagCreate.as_view(), name="tag-create"),
     path("add_follower/<slug:name>", add_user_to_followers, name="add-follower"),
     path(

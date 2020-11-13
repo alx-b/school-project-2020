@@ -8,10 +8,11 @@
 {% for comment in object_list %}
 <div class="comment">
     <div class="comment-text">
-        {{ comment.text }}</a>
+        {{comment.text}}
     </div>
     <footer class="comment-footer">
         <div class="temp">
+            <a class="comment-link" href="{% url 'comments:comment' pk=comment.pk %}">To Comment {{comment.pk}}</a>
             <p>Commented on: <a class="comment-link" href="{% url 'posts:post' pk=comment.post.id %}">{{ comment.post.title }}</a></p>
             <p>Posted {{comment.date_posted}} by {{ comment.user }}
             {% if comment.last_updated %}

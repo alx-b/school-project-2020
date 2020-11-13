@@ -8,6 +8,7 @@ from django.contrib.auth import models as auth_models
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.db.models import Count
 
 from .models import Tag
 from .forms import ModeratorForm
@@ -19,10 +20,41 @@ from posts.models import Post
 class TagList(ListView):
     model = Tag
     template_name = "tags/tags.html"
+    ordering = ["name"]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
+
+class TagListOrderByFollowers(ListView):
+    model = Tag
+    template_name = "tags/tags.html"
+    # ordering = ["-followers"]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+    def get_queryset(self):
+        query = Tag.objects.annotate(Count("followers__id")).order_by(
+            "-followers__id__count"
+        )
+        return query
+
+
+class TagListOrderByPosts(ListView):
+    model = Tag
+    template_name = "tags/tags.html"
+    # ordering = ["-followers"]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+    def get_queryset(self):
+        query = Tag.objects.annotate(Count("post__id")).order_by("-post__id__count")
+        return query
 
 
 class TagDetail(DetailView):
