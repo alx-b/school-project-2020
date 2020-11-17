@@ -4,9 +4,18 @@
 {% block content %}
     <div class="page-buttons-bar">
         <h1>Tags</h1>
+
         {% if user.is_authenticated %}
         <a class="buttons" href="{% url 'tags:tag-create' %}">Create a tag</a>
         {% endif %}
+        <div class="dropdown">
+            <button class="buttons order-by">Order</button>
+            <div class="tag-buttons">
+                <a class="special-buttons" href="{% url 'tags:tags' %}">Order by tags</a>
+                <a class="special-buttons" href="{% url 'tags:tags-order-followers' %}">Order by followers</a>
+                <a class="special-buttons" href="{% url 'tags:tags-order-posts' %}">Order by posts</a>
+            </div>
+        </div>
     </div>
     <div class="tag-container">
     {% for tag in object_list %}
@@ -20,6 +29,25 @@
         <h2>No tag yet!</h2>
         {% endfor %}
     </div>
+
+    <script>
+        let button = document.querySelector(".order-by");
+        let allButtons = document.querySelector(".tag-buttons");
+        allButtons.style.display = "none";
+
+        button.addEventListener("mouseover", showOrderMenu);
+        button.addEventListener("mouseout", hideOrderMenu);
+        allButtons.addEventListener("mouseover", showOrderMenu);
+        allButtons.addEventListener("mouseout", hideOrderMenu);
+
+        function showOrderMenu(){
+            allButtons.style.display = "grid";
+        }
+
+        function hideOrderMenu(){
+            allButtons.style.display = "none";
+        }
+    </script>
 
 {% endblock %}
 

@@ -1,3 +1,45 @@
+.dropdown {
+    display: grid;
+    margin-right: auto;
+}
+
+.order-by {
+    margin: auto;
+    margin-right: auto;
+}
+
+.page-buttons-bar {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: auto auto 1fr;
+    position: relative;
+}
+
+.tag-buttons {
+    display: none;
+    position: absolute;
+    top: 40px;
+    z-index: 10;
+    border: 1px solid #67d;
+    background-color: #222;
+}
+
+.special-buttons {
+    font-size: 14px;
+    background-color: #222;
+    color: #67d;
+    text-decoration: 0;
+    //margin: 10px;
+    //margin-right: auto;
+    align-self: center;
+    padding: 6px;
+}
+
+.special-buttons:hover {
+    color: #fff;
+    background-color: #67d;
+}
+
 .tag-page-container > sidebar > h1 {
     text-align: center;
 }
