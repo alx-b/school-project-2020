@@ -25,6 +25,9 @@
             <a href="{% url 'tags:tag' name=tag_name %}">#{{tag_name}}</a>
             {% endfor %}
         </div>
+        <div class="total-comments">
+            <div>{{post.comment_set.count}} comments</div>
+        </div>
     </footer>
 </div>
 
