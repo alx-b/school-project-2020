@@ -7,16 +7,18 @@ from django.contrib.auth import models as auth_models
 from django.shortcuts import get_object_or_404
 from django.db.models import Count
 from django.core.paginator import Paginator
+from django.contrib.messages.views import SuccessMessageMixin
 
 from .forms import RegisterForm
 from tags.models import Tag
 from posts.models import Post
 
 # Create your views here.
-class RegisterView(CreateView):
+class RegisterView(SuccessMessageMixin, CreateView):
     form_class = RegisterForm
     success_url = reverse_lazy("accounts:login")
     template_name = "accounts/register.html"
+    success_message = "Account '%(username)s' was created successfully!"
 
 
 class ProfileView(LoginRequiredMixin, UserPassesTestMixin, ListView):

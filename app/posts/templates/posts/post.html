@@ -16,7 +16,7 @@
     </div>
 
     <div class="post-text">
-        <p>{{post.text}}</p>
+        <p>{{post.text | safe | linebreaks}}</p>
     </div>
 
     <footer class="post-footer">
