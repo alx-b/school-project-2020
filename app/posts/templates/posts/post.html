@@ -7,7 +7,12 @@
 </div>
 <div class="post">
     <div class="post-title">
+        {% if post.link %}
         <a href="{{post.link}}">{{post.title}}</a>
+        {% else %}
+        <a href="#">{{post.title}}</a>
+        {% endif %}
+        
     </div>
 
     <div class="post-text">
