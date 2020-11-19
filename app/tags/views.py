@@ -140,24 +140,12 @@ def remove_user_from_moderators(request, name, **kwargs):
         return redirect("tags:tag", name=tag.name)
 
 
-# @login_required
-# def mod_add_tag_to_post(request, id, **kwargs):
-#    mod_tags = Tag.moderators.objects.filter(user_id=request.user.id)
-#    post = get_object_or_404(Post, id=id)
-#    if request.method == "POST":
-#        form = TagSelectForm(request.POST)
-#        if form.is_valid():
-#            print("it's valid!")
-#    form = TagSelectForm(mod_tags)
-
-
 class TagCreate(LoginRequiredMixin, CreateView):
     model = Tag
-    fields = ["name", "text"]
+    fields = ["name", "text", "moderators"]
     template_name = "tags/tag_create.html"
 
     def form_valid(self, form):
-        # form.instance.user = self.request.user
         return super().form_valid(form)
 
 
