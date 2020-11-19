@@ -84,3 +84,12 @@
     margin: 10px;
     //border: 4px solid #999;
 }
+
+.page-buttons-bar {
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+
+.page-buttons-bar > .buttons {
+    margin-right: auto;
+}
