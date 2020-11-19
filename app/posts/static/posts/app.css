@@ -1,12 +1,10 @@
 .post {
     background-color: #222;
     border-radius: 6px;
-    //border: 4px solid #999;
 }
 
 .post-title {
     margin: 10px 10px 0px 10px;
-    //border: 4px solid #999;
 }
 
 .post-title > a {
@@ -26,7 +24,6 @@
     display: grid;
     font-size: 12px;
     margin: 10px;
-    //border: 4px solid #999;
 }
 
 .post-footer > .buttons {
@@ -75,9 +72,9 @@
 
 .comment-footer {
     display: grid;
+    grid-gap: 10px;
     font-size: 12px;
     margin: 10px;
-    //border: 4px solid #999;
 }
 
 .page-buttons-bar {
@@ -97,7 +94,7 @@
 
 .moderator-actions {
     margin: auto;
-    margin-right: auto;
+//    margin-right: auto;
 }
 
 .moderator-buttons {
@@ -118,14 +115,13 @@
     grid-gap: 10px;
     margin: 10px;
     margin-top: 16px;
-    margin-bottom: 20px;
 }
 
 .post-buttons > a {
     margin-right: auto;
 }
 
-button {
+.post-buttons > button {
     margin-right: auto;
 }
 
@@ -143,4 +139,42 @@ button {
 .special-buttons:hover {
     color: #fff;
     background-color: #67d;
+}
+
+.form-delete-button {
+    background-color: #222;
+    color: #d55;
+    padding: 6px;
+    border-radius: 6px;
+    text-decoration: 0;
+    border: 1px solid #d55;
+    margin-right: auto;
+}
+
+.form-delete-button:hover {
+    color: #fff;
+    background-color: #d55;
+}
+
+.comment-form-delete-button {
+    background-color: #222;
+    color: #d55;
+    padding: 6px;
+    border-radius: 6px;
+    text-decoration: 0;
+    border: 1px solid #d55;
+    margin-right: auto;
+}
+
+.comment-form-delete-button:hover {
+    color: #fff;
+    background-color: #d55;
+}
+
+.comment-del-container {
+    margin-top: 10px;
+}
+
+.post-del-container {
+    margin: 10px;
 }

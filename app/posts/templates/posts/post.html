@@ -38,7 +38,7 @@
     <div class="post-buttons">
         {% if object.user == user %}
             <a class="buttons" href="{% url 'posts:post-update' pk=post.pk %}">Update</a>
-            <button type="button" class="post-delete-button">Delete</button>
+            <button type="button" class="buttons post-delete-button">Delete</button>
         {% endif %}
             {% if user.is_authenticated and moderator %}
             <div class="dropdown">
@@ -51,9 +51,9 @@
         {% endif %}
             
     </div>
-    <div class="post-del-container" hidden>
-        {% include 'posts/post_delete.html' %}
-    </div>
+        <div class="post-del-container" hidden>
+            {% include 'posts/post_delete.html' %}
+        </div>
 </div>
 
 <div>
@@ -79,7 +79,7 @@
             <div>
             {% if comment.user == user %}
                 <a class="buttons" href="{% url 'comments:comment-update' pk=comment.pk %}">Update</a>
-                <button type="button" class="comment-delete-button">Delete</button>
+                <button type="button" class="buttons comment-delete-button">Delete</button>
                     <div class="comment-del-container" hidden>
                         {% include 'comments/comment_delete.html' %}
                     </div>

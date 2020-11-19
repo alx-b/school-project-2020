@@ -17,16 +17,16 @@
                 (updated {{comment.last_updated}})
             {% endif %}
         </div>
-    </footer>
-    <div class="comment-buttons">
+        <div class="comment-buttons">
         {% if object.user == user %}
             <a class="buttons" href="{% url 'comments:comment-update' pk=comment.pk %}">Update</a>
-            <button type="button" class="comment-delete-button">Delete</button>
+            <button type="button" class="buttons comment-delete-button">Delete</button>
         {% endif %}
-    </div>
-    <div class="comment-del-container" hidden>
-        {% include 'comments/comment_delete.html' %}
-    </div>
+        </div>
+        <div class="comment-del-container" hidden>
+            {% include 'comments/comment_delete.html' %}
+        </div>
+    </footer>
 </div>
 
 
