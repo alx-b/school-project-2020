@@ -67,7 +67,7 @@ class TagDetail(DetailView):
         posts = Post.objects.filter(tags__name=self.kwargs["name"]).order_by(
             "-date_posted"
         )
-        paginator = Paginator(posts, 2)
+        paginator = Paginator(posts, 16)
         page_number = self.request.GET.get("page")
         page_object = paginator.get_page(page_number)
         context.update({"page_object": page_object})

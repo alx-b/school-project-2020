@@ -77,7 +77,7 @@ class PostDetail(DetailView):
             "-date_posted"
         )
 
-        paginator = Paginator(comments, 2)
+        paginator = Paginator(comments, 16)
         page_number = self.request.GET.get("page")
         context["page_object"] = paginator.get_page(page_number)
 
