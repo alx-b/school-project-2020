@@ -57,7 +57,7 @@ def mod_remove_tag_from_post(request, **kwargs):
 class PostList(ListView):
     model = Post
     template_name = "posts/posts.html"
-    paginate_by = 2
+    paginate_by = 16
     ordering = ["-date_posted"]
 
     def get_context_data(self, **kwargs):

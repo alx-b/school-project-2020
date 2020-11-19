@@ -41,7 +41,7 @@ class ProfileView(LoginRequiredMixin, UserPassesTestMixin, ListView):
             .order_by("-date_posted")
         )
 
-        paginator = Paginator(posts, 2)
+        paginator = Paginator(posts, 16)
         page_number = self.request.GET.get("page")
         context["page_object"] = paginator.get_page(page_number)
         context["user"] = user

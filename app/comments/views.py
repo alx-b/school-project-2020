@@ -15,7 +15,7 @@ from posts.models import Post
 class CommentList(ListView):
     model = Comment
     template_name = "comments/comments.html"
-    paginate_by = 2
+    paginate_by = 16
     ordering = ["-date_posted"]
 
     def get_context_data(self, **kwargs):
