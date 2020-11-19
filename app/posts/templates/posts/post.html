@@ -40,9 +40,14 @@
             <a class="buttons" href="{% url 'posts:post-update' pk=post.pk %}">Update</a>
             <button type="button" class="post-delete-button">Delete</button>
         {% endif %}
-        {% if user.is_authenticated and moderator %}
-            <a class="buttons" href="{% url 'posts:mod-tag-add' pk=post.pk %}">Add Tag</a>
-            <a class="buttons" href="{% url 'posts:mod-tag-remove' pk=post.pk %}">Remove Tag</a>
+            {% if user.is_authenticated and moderator %}
+            <div class="dropdown">
+            <button class="buttons moderator-actions">Moderator</button>
+            <div class="moderator-buttons">
+                <a class="special-buttons" href="{% url 'posts:mod-tag-add' pk=post.pk %}">Add Tag</a>
+                <a class="special-buttons" href="{% url 'posts:mod-tag-remove' pk=post.pk %}">Remove Tag</a>
+            </div>
+            </div>
         {% endif %}
             
     </div>
@@ -106,7 +111,26 @@
 
 </div>
 
+    <script>
+        let button = document.querySelector(".moderator-actions");
+        let allButtons = document.querySelector(".moderator-buttons");
+        allButtons.style.display = "none";
+
+        button.addEventListener("mouseover", showOrderMenu);
+        button.addEventListener("mouseout", hideOrderMenu);
+        allButtons.addEventListener("mouseover", showOrderMenu);
+        allButtons.addEventListener("mouseout", hideOrderMenu);
+
+        function showOrderMenu(){
+            allButtons.style.display = "grid";
+        }
+
+        function hideOrderMenu(){
+            allButtons.style.display = "none";
+        }
+    </script>
 
 <script src="{% static 'posts/post.js' %}"></script>
 <script src="{% static 'comments/comment.js' %}"></script>
+
 {% endblock %}
