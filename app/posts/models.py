@@ -11,7 +11,7 @@ class Post(models.Model):
     link = models.URLField(max_length=300, null=True, blank=True)
     text = models.TextField(max_length=3000, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    tags = models.ManyToManyField(Tag, null=True, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True)
     date_posted = models.DateTimeField(default=timezone.now)
     last_updated = models.DateTimeField(null=True)
 
