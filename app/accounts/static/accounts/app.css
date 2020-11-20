@@ -109,3 +109,11 @@ sidebar > .tag-list {
 .tag > a:hover {
     text-decoration: underline;
 }
+
+.link {
+    text-decoration: 0;
+    color: #d55;
+}
+.link:hover {
+    text-decoration: underline;
+}
