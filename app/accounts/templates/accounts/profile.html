@@ -5,10 +5,23 @@
 <div class="profile-page-container">
     <sidebar>
         <h1>{{user.username}}</h1>
-        <p>user description</p>
-        <h3>Tag followed</h3>
+        <p>user descriptioni dffsdfsd
+            fdsfdsf
+            fsfsdf sdfaas  asdad
+            asdasd
+            asdasd 
+        </p>
+        <h4>Following: {{user.user_follower.count}} tags</h4>
         <div class="tag-list">
             {% for tag in followed_tags %}
+                <div class="tag">
+                    <a href="{% url 'tags:tag' name=tag.name %}">{{tag.name}}</a>
+                </div>
+            {% endfor %}
+        </div>
+        <h4>Moderating: {{user.user_moderator.count}} tags</h4>
+        <div class="tag-list">
+            {% for tag in moderated_tags %}
                 <div class="tag">
                     <a href="{% url 'tags:tag' name=tag.name %}">{{tag.name}}</a>
                 </div>

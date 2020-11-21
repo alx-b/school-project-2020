@@ -49,10 +49,18 @@
 }
 
 .tag-container {
-    display: grid;
-    grid-template-columns: repeat(10, auto);
-    grid-gap: 10px;
-    justify-content: start;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+    //margin: 10px;
+}
+
+.tag-container > .tag {
+    padding: 8px;
+    margin-bottom: 8px;
+    margin-right: 8px;
+    border-radius: 6px;
 }
 
 .tag {
@@ -133,10 +141,37 @@
 }
 
 .list-moderators {
-    display: grid;
-    grid-gap: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+    margin: 10px;
 }
 
 .moderator {
-    
+    background-color: #333;
+    padding: 8px;
+    margin-bottom: 4px;
+    margin-right: 4px;
+    border-radius: 6px;
+}
+
+.sidebar-tag-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+    margin: 10px;
+}
+
+.sidebar-tag-buttons > .buttons {
+    //background-color: #333;
+    //padding: 8px;
+    margin-bottom: 4px;
+    margin-right: 4px;
+    border-radius: 6px;
+}
+
+sidebar > h4 {
+    margin: 10px
 }

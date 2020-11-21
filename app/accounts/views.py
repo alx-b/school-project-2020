@@ -33,7 +33,12 @@ class ProfileView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
-        context["followed_tags"] = Tag.objects.filter(followers__id=user.id)
+        context["followed_tags"] = Tag.objects.filter(followers__id=user.id).order_by(
+            "name"
+        )
+        context["moderated_tags"] = Tag.objects.filter(moderators__id=user.id).order_by(
+            "name"
+        )
         tags_name = [tag.name for tag in context["followed_tags"]]
         posts = (
             Post.objects.filter(tags__name__in=tags_name)

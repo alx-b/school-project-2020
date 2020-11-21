@@ -7,7 +7,7 @@
         <h1>{{tag.name}}</h1>
         <p>{{tag.text}}</p>
         {% if user.is_authenticated %}
-        <div>
+        <div class="sidebar-tag-buttons">
             {% if user in tag.moderators.all %}
             <a class="buttons" href="{% url 'tags:tag-update' name=tag.name %}">Update</a>
             <a class="buttons" href="{% url 'tags:tag-delete' name=tag.name %}">Delete</a>
@@ -25,11 +25,13 @@
             {% endif %}
         </div>
         {% endif %}
-        <h3>Moderators</h3>
+        <h4>Moderators</h4>
 
         {% if user in tag.moderators.all %}
+        <div class="sidebar-tag-buttons">
         <a class="buttons" href="{% url 'tags:add-moderator' name=tag.name %}">Add Moderator</a>
         <a class="buttons" href="{% url 'tags:remove-moderator' name=tag.name %}">Remove Moderator</a>
+        </div>
         {% endif %}
         <div class="list-moderators">
             {% for moderator in tag.moderators.all %}
