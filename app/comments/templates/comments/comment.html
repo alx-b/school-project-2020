@@ -2,26 +2,35 @@
 {% load static %}
 
 {% block content %}
-<div class="page-buttons-bar">
+<div class="top-bar">
     <h1>Comment</h1>
 </div>
 <div class="comment">
-    <div class="comment-text">
-        <p>{{comment.text}}</p>
-    </div>
-
+    <div class="comment-text">{{comment.text}}</div>
     <footer class="comment-footer">
-        <div class="temp">
-            Posted {{comment.date_posted}} by {{ comment.user }}
+        <div class="post-info">
+            <div>
+                Commented {{comment.date_posted}} by {{ comment.user }}
             {% if comment.last_updated %}
                 (updated {{comment.last_updated}})
             {% endif %}
+            </div>
+            <div>
+                <a
+                    class="comment-link"
+                    href="{% url 'comments:comment' pk=comment.pk %}"
+                >Comment {{comment.pk}}</a>
+                on post <a
+                            class="comment-link"
+                            href="{% url 'posts:post' pk=comment.post.id %}"
+                        >{{comment.post.title}}</a>
+            </div>
         </div>
         <div class="comment-buttons">
-        {% if object.user == user %}
-            <a class="buttons" href="{% url 'comments:comment-update' pk=comment.pk %}">Update</a>
-            <button type="button" class="buttons comment-delete-button">Delete</button>
-        {% endif %}
+            {% if object.user == user %}
+                <a class="buttons" href="{% url 'comments:comment-update' pk=comment.pk %}">Update</a>
+                <button type="button" class="buttons comment-delete-button">Delete</button>
+            {% endif %}
         </div>
         <div class="comment-del-container" hidden>
             {% include 'comments/comment_delete.html' %}

@@ -1,34 +1,53 @@
 .post {
-    background-color: #222;
+    display: grid;
     border-radius: 6px;
-}
-
-.post-title {
-    margin: 10px 10px 0px 10px;
+    background-color: var(--bg2-color);
+    grid-gap: 16px;
+    border: 10px solid var(--bg2-color);
 }
 
 .post-title > a {
     text-decoration: 0;
-    color: #d55;
+    color: var(--link-color);
 }
 
 .post-title > a:hover {
     text-decoration: underline;
 }
 
-.post-text {
-    margin: 10px;
-}
-
 .post-footer {
     display: grid;
-    font-size: 12px;
-    margin: 10px;
+    grid-gap: 6px;
+    font-size: 0.7rem;
 }
 
 .post-footer > .buttons {
-    background-color: #222;
+    background-color: var(--bg2-color);
 }
+
+.post-tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.post-tag-list > a {
+    background-color: var(--bg3-color);
+    color: var(--link-color);
+    text-decoration: 0;
+    margin-bottom: 4px;
+    margin-right: 4px;
+    border-radius: 6px;
+    padding: 6px;
+}
+
+.post-tag-list > a:hover {
+    background-color: var(--link-color);
+    color: var(--font-hover-color);
+}
+
 
 .del-button {
     background-color: #222;
@@ -44,14 +63,6 @@
     color: white;
 }
 
-.post-tags > a {
-    text-decoration: 0;
-    color: #d55;
-}
-
-.post-tags > a:hover {
-    text-decoration: underline;
-}
 
 
 .comment-list {
@@ -77,24 +88,20 @@
     margin: 10px;
 }
 
-.page-buttons-bar {
-    display: grid;
-    grid-template-columns: auto 1fr;
+.post-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
 }
 
-.page-buttons-bar > .buttons {
-    margin-right: auto;
+.buttons {
+    margin-right: 4px;
 }
 
 .dropdown {
     display: grid;
-    margin-right: auto;
     position: relative;
-}
-
-.moderator-actions {
-    margin: auto;
-//    margin-right: auto;
 }
 
 .moderator-buttons {
@@ -105,33 +112,15 @@
     width: 101px;
     border: 1px solid #67d;
     background-color: #222;
-    margin-right: auto;
 }
 
-.post-buttons {
-    display: grid;
-    grid-template-columns: auto auto 1fr;
-    //position: relative;
-    grid-gap: 10px;
-    margin: 10px;
-    margin-top: 16px;
-}
 
-.post-buttons > a {
-    margin-right: auto;
-}
-
-.post-buttons > button {
-    margin-right: auto;
-}
 
 .special-buttons {
     font-size: 14px;
     background-color: #222;
     color: #67d;
     text-decoration: 0;
-    //margin: 10px;
-    //margin-right: auto;
     align-self: center;
     padding: 6px;
 }
@@ -173,8 +162,4 @@
 
 .comment-del-container {
     margin-top: 10px;
-}
-
-.post-del-container {
-    margin: 10px;
 }

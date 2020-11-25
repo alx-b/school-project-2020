@@ -2,32 +2,38 @@
 {% load static %}
 
 {% block content %}
-<div class="page-buttons-bar">
+<div class="top-bar">
     <h1>Comments</h1>
 </div>
-{% for comment in object_list %}
-<div class="comment">
-    <div class="comment-text">
-        {{comment.text}}
-    </div>
-    <footer class="comment-footer">
-        <div class="temp">
-            <a class="comment-link" href="{% url 'comments:comment' pk=comment.pk %}">To Comment {{comment.pk}}</a>
-            <p>Commented on: <a class="comment-link" href="{% url 'posts:post' pk=comment.post.id %}">{{ comment.post.title }}</a></p>
-            <p>Posted {{comment.date_posted}} by {{ comment.user }}
-            {% if comment.last_updated %}
-                (updated {{comment.last_updated}})
-                {% endif %}
-                </p>
+<div class="comments-container">
+    {% for comment in object_list %}
+        <div class="comment">
+            <div class="comment-text">{{comment.text}}</div>
+            <footer class="comment-footer">
+                <div class="post-info">
+                    <div>
+                        Commented {{comment.date_posted}} by {{ comment.user }}
+                    {% if comment.last_updated %}
+                        (updated {{comment.last_updated}})
+                    {% endif %}
+                    </div>
+                    <div>
+                        <a
+                            class="comment-link"
+                            href="{% url 'comments:comment' pk=comment.pk %}"
+                        >Comment {{comment.pk}}</a>
+                        on post <a
+                                    class="comment-link"
+                                    href="{% url 'posts:post' pk=comment.post.id %}"
+                                >{{comment.post.title}}</a>
+                    </div>
+                </div>
+            </footer>
         </div>
-
-        
-    </footer>
+    {% empty %}
+        <h2>No comment yet!</h2>
+    {% endfor %}
 </div>
-
-{% empty %}
-<h2>No comment yet!</h2>
-{% endfor %}
 
 <div class="pagination">
     <span class="step-links">

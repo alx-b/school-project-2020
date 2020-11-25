@@ -1,51 +1,120 @@
-.comment {
-    background-color: #222;
+/* comments.html */
+.comments-container {
+    display: grid;
+    grid-gap: 10px;
     border-radius: 6px;
-    //border: 4px solid #999;
+    margin-bottom: auto;
 }
 
-
-.comment-text {
-    margin: 10px;
+.comment {
+    display: grid;
+    border-radius: 6px;
+    background-color: var(--bg2-color);
+    grid-gap: 16px;
+    border: 10px solid var(--bg2-color);
 }
 
 .comment-footer {
     display: grid;
-    font-size: 12px;
-    margin: 10px;
-    //border: 4px solid #999;
+    grid-gap: 6px;
+    font-size: 0.7rem;
 }
 
+.comment-link {
+    color: var(--link-color);
+    text-decoration: 0;
+}
+
+.comment-link:hover {
+    text-decoration: underline;
+}
+
+/* comment.html */
+.comment-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.comment-buttons > .buttons {
+    text-decoration: 0;
+    margin-bottom: 4px;
+    margin-right: 4px;
+    border-radius: 6px;
+    padding: 6px;
+}
+
+
+/* comment_create.html */
+.post {
+    display: grid;
+    border-radius: 6px;
+    background-color: var(--bg2-color);
+    grid-gap: 16px;
+    border: 10px solid var(--bg2-color);
+}
+
+.post-title > a {
+    text-decoration: 0;
+    color: var(--link-color);
+}
+
+.post-title > a:hover {
+    text-decoration: underline;
+}
+
+.post-footer {
+    display: grid;
+    grid-gap: 6px;
+    font-size: 0.7rem;
+}
+
+.post-footer > .buttons {
+    background-color: var(--bg2-color);
+}
+
+.post-tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.post-tag-list > a {
+    background-color: var(--bg3-color);
+    color: var(--link-color);
+    text-decoration: 0;
+    margin-bottom: 4px;
+    margin-right: 4px;
+    border-radius: 6px;
+    padding: 6px;
+}
+
+.post-tag-list > a:hover {
+    background-color: var(--link-color);
+    color: var(--font-hover-color);
+}
+
+
 .comment-footer > .buttons {
-    background-color: #222;
+    background-color: var(--bg2-color);
 }
 
 .del-button {
-    background-color: #222;
-    color: #67d;
-    border: 1px solid #67d;
+    background-color: var(--bg2-color);
+    color: var(--btn-color);
+    border: 1px solid var(--btn-color);
     border-radius: 6px;
     padding: 6px;
     cursor: pointer;
 }
 
 .del-button:hover {
-    background-color: #67d;
-    color: white;
+    background-color: var(--btn-color);
+    color: var(--font-hover-color);
 }
 
-
-.comment-buttons {
-    margin-top: 16px;
-}
-
-.comment-link {
-    color: #d55;
-}
-
-.comment-link:hover {
-    text-decoration: underline;
-}
 
 .comment-form-delete-button {
     background-color: #222;
