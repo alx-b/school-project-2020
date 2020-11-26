@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import models as auth_models
+from django.contrib.auth import views as auth_views
 from django.shortcuts import get_object_or_404
 from django.db.models import Count
 from django.core.paginator import Paginator
@@ -51,3 +52,10 @@ class ProfileView(LoginRequiredMixin, UserPassesTestMixin, ListView):
         context["page_object"] = paginator.get_page(page_number)
         context["user"] = user
         return context
+
+
+class PasswordUpdateView(SuccessMessageMixin, auth_views.PasswordChangeView):
+    model = auth_models.User
+    template_name = "accounts/update.html"
+    success_url = reverse_lazy("accounts:profile")
+    success_message = "Password was successfully changed!"
