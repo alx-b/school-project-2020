@@ -145,3 +145,10 @@ sidebar > h1 {
 .helptext > ul {
     margin-left: 10px;
 }
+
+.sidebar-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}

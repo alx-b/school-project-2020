@@ -5,6 +5,9 @@
 <div class="profile-page-container">
     <sidebar>
         <h1>{{user.username}}</h1>
+        <div class="sidebar-buttons">
+            <a class="buttons" href="{% url 'accounts:update' %}">Change Password</a>
+        </div>
         <h4>Following: {{user.user_follower.count}} tags</h4>
         <div class="tag-list">
             {% for tag in followed_tags %}
