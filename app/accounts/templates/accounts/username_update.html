@@ -1,0 +1,15 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="top-bar">
+  <h1>Change Username</h1>
+</div>
+<div class="update-form-container">
+  <form method="post">
+    {% csrf_token %}
+    {{form}}
+    <input class="buttons" type="submit" value="Save">
+  </form>
+</div>
+{% endblock %}

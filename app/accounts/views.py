@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView
-from django.views.generic import CreateView, DeleteView
+from django.views.generic import CreateView, DeleteView, UpdateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import models as auth_models
 from django.contrib.auth import views as auth_views
@@ -10,7 +10,7 @@ from django.db.models import Count
 from django.core.paginator import Paginator
 from django.contrib.messages.views import SuccessMessageMixin
 
-from .forms import RegisterForm
+from .forms import RegisterForm, UserChangeForm
 from tags.models import Tag
 from posts.models import Post
 
@@ -59,3 +59,21 @@ class PasswordUpdateView(SuccessMessageMixin, auth_views.PasswordChangeView):
     template_name = "accounts/update.html"
     success_url = reverse_lazy("accounts:profile")
     success_message = "Password was successfully changed!"
+
+
+class UsernameUpdateView(
+    SuccessMessageMixin, LoginRequiredMixin, UserPassesTestMixin, UpdateView
+):
+    model = auth_models.User
+    fields = ["username"]
+    template_name = "accounts/username_update.html"
+    success_url = reverse_lazy("accounts:profile")
+    success_message = "Username was successfully changed!"
+
+    def test_func(self):
+        if (
+            self.request.user.is_authenticated
+            and self.request.user.id == self.kwargs["pk"]
+        ):
+            return True
+        return False
