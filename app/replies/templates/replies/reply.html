@@ -1,0 +1,34 @@
+{% extends "replies/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="top-bar">
+    <h1>Reply</h1>
+</div>
+<div class="reply">
+    <div class="reply-text">{{reply.text}}</div>
+    <footer class="reply-footer">
+        <div class="post-info">
+            <div>
+                Replied {{reply.date_posted}} by {{ reply.user }}
+            {% if reply.last_updated %}
+                (updated {{reply.last_updated}})
+            {% endif %}
+            </div>
+            <div>
+                <a
+                    class="reply-link"
+                    href="{% url 'replies:reply' pk=reply.pk %}"
+                >Reply {{reply.pk}}</a>
+                on comment <a
+                            class="reply-link"
+                            href="{% url 'comments:comment' pk=reply.comment.id %}"
+                        >{{reply.comment.id}}</a>
+            </div>
+        </div>
+    </footer>
+</div>
+
+
+
+{% endblock %}

@@ -27,7 +27,7 @@
                 {% endif %}
             </div>
             <div class="total-comments">
-                <div>{{post.comment_set.count}} comments</div>
+                <div>{{post.comment_set.count}} comments, {{total_replies}} replies</div>
             </div>
         </div>
         <div class="post-tag-list">
@@ -79,7 +79,16 @@
                     (updated {{comment.last_updated}})
                 {% endif %}
             </div>
+            <div class="total-replies">
+                <div>{{comment.reply_set.count}} replies</div>
+            </div>
             <div>
+                {% if comment.reply_set.count > 0 %}
+                <button type="button" class="buttons toggle-reply">Hide Replies</button>
+                {% endif %}
+                {% if user.is_authenticated %}
+                    <a class="buttons" href="{% url 'comments:comment-reply-create' pk=comment.pk %}">Reply</a>
+                {% endif %}
             {% if comment.user == user %}
                 <a class="buttons" href="{% url 'comments:comment-update' pk=comment.pk %}">Update</a>
                 <button type="button" class="buttons comment-delete-button">Delete</button>
@@ -89,8 +98,25 @@
             {% endif %}
             </div>
         </footer>
-            
     </div>
+    <div class="reply-list">
+        {% for reply in comment.reply_set.all %}
+        <div class="reply">
+            <div class="reply-text">
+                {{reply.text}}
+            </div>
+            <footer class="reply-footer">
+                <div>
+                Posted {{reply.date_posted}} by {{ reply.user }}
+                {% if reply.last_updated %}
+                    (updated {{reply.last_updated}})
+                {% endif %}
+                </div>
+            </footer>
+        </div>
+        {% endfor %}
+    </div>
+
     {% endfor %}
 
         <div class="pagination">
@@ -130,6 +156,23 @@
 
         function hideOrderMenu(){
             allButtons.style.display = "none";
+        }
+
+        let toggleButton = document.querySelector(".toggle-reply");
+        let replyList = document.querySelector(".reply-list");
+        replyList.style.display = "grid";
+
+        toggleButton.addEventListener("click", toggleReplyList);
+
+        function toggleReplyList(){
+            if (replyList.style.display == "grid"){
+                replyList.style.display = "none";
+                toggleButton.innerHTML = "Show Replies"
+            }
+            else {
+                replyList.style.display = "grid";
+                toggleButton.innerHTML = "Hide Replies"
+            }
         }
     </script>
 

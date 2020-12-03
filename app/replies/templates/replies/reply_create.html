@@ -1,0 +1,80 @@
+{% extends "replies/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="top-bar">
+    <h1>Compose Reply</h1>
+</div>
+
+<div class="page-split">
+    <div class="left-side">
+        <div class="comment">
+            <div class="comment-text">
+                <p>{{comment.text | safe | linebreaks}}</p>
+            </div>
+            <footer class="comment-footer">
+                <div class="comment-info">
+                    <div class="comment-date-user">
+                        Commented {{comment.date_posted}} by {{ comment.user }}
+                        {% if comment.last_updated %}
+                            (updated {{comment.last_updated}})
+                        {% endif %}
+                    </div>
+                    <div class="total-replies">
+                        <div>{{comment.reply_set.count}} replies</div>
+                    </div>
+                    {% if comment.reply_set.count > 0 %}
+                    <button type="button" class="buttons toggle-reply">Hide Replies</button>
+                    {% endif %}
+                </div>
+            </footer>
+        </div>
+        <div class="reply-list">
+            {% for reply in comment.reply_set.all %}
+            <div class="reply">
+                <div class="reply-text">
+                    {{reply.text}}
+                </div>
+                <footer class="reply-footer">
+                    <div>
+                    Posted {{reply.date_posted}} by {{ reply.user }}
+                    {% if reply.last_updated %}
+                        (updated {{reply.last_updated}})
+                    {% endif %}
+                    </div>
+                </footer>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-container">
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input class="buttons" type="submit" value="Reply">
+        </form>
+    </div>
+</div>
+
+<script>
+    let toggleButton = document.querySelector(".toggle-reply");
+    let replyList = document.querySelector(".reply-list");
+    replyList.style.display = "grid";
+
+    toggleButton.addEventListener("click", toggleReplyList);
+
+    function toggleReplyList(){
+        if (replyList.style.display == "grid"){
+            replyList.style.display = "none";
+            toggleButton.innerHTML = "Show Replies"
+        }
+        else {
+            replyList.style.display = "grid";
+            toggleButton.innerHTML = "Hide Replies"
+        }
+    }
+</script>
+
+{% endblock %}

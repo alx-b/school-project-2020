@@ -1,0 +1,57 @@
+{% extends "replies/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="top-bar">
+    <h1>Replies</h1>
+</div>
+<div class="replies-container">
+    {% for reply in object_list %}
+        <div class="reply">
+            <div class="reply-text">{{reply.text}}</div>
+            <footer class="reply-footer">
+                <div class="post-info">
+                    <div>
+                        Replied {{reply.date_posted}} by {{ reply.user }}
+                    {% if reply.last_updated %}
+                        (updated {{reply.last_updated}})
+                    {% endif %}
+                    </div>
+                    <div>
+                        <a
+                            class="reply-link"
+                            href="{% url 'replies:reply' pk=reply.pk %}"
+                        >Reply {{reply.pk}}</a>
+                        on comment <a
+                                    class="reply-link"
+                                    href="{% url 'comments:comment' pk=reply.comment.id %}"
+                                >{{reply.comment.id}}</a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    {% empty %}
+        <h2>No reply yet!</h2>
+    {% endfor %}
+</div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last</a>
+        {% endif %}
+    </span>
+</div>
+
+
+{% endblock %}

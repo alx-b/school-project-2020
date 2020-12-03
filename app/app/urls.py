@@ -23,4 +23,5 @@ urlpatterns = [
     path("posts/", include("posts.urls")),
     path("tags/", include("tags.urls")),
     path("comments/", include("comments.urls")),
+    path("replies/", include("replies.urls")),
 ]

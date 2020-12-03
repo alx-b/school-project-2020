@@ -1,0 +1,65 @@
+.page-split {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 10px;
+}
+
+.left-side {
+    display: grid;
+    grid-gap: 10px;
+    margin-bottom: auto;
+}
+
+.form-container {
+    display: grid;
+    margin-bottom: auto;
+}
+
+
+.comment {
+    display: grid;
+    background-color: #333;
+    border-radius: 6px;
+    border: 10px solid #333;
+    grid-gap: 16px;
+}
+
+.comment-text {
+}
+
+.comment-footer {
+    display: grid;
+    grid-gap: 10px;
+    font-size: 12px;
+}
+
+
+.reply-list {
+    display: grid;
+    grid-gap: 6px;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: #111;
+    border-radius: 6px;
+    max-height: 60vh;
+    overflow: scroll;
+    overflow-x: hidden;
+    padding-right: 10px;
+}
+
+.reply {
+    display: grid;
+    grid-gap: 16px;
+    background-color: #444;
+    border: 10px solid #444;
+    border-radius: 6px;
+}
+
+.reply-text {
+}
+
+.reply-footer {
+     display: grid;
+     grid-gap: 6px;
+     font-size: 0.7rem;
+}

@@ -81,6 +81,13 @@ class PostDetail(DetailView):
         page_number = self.request.GET.get("page")
         context["page_object"] = paginator.get_page(page_number)
 
+        comments = Comment.objects.filter(post=self.kwargs["pk"])
+        total_replies = 0
+        for comment in comments:
+            total_replies += comment.reply_set.count()
+
+        context["total_replies"] = total_replies
+
         return context
 
 
