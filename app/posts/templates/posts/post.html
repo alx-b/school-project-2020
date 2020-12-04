@@ -69,7 +69,7 @@
     {% for comment in page_object %}
     <div class="comment">
         <div class="comment-text">
-            <p>{{comment.text}}</p>
+            <p>{{comment.text | safe | linebreaks}}</p>
         </div>
 
         <footer class="comment-footer">
@@ -103,7 +103,7 @@
         {% for reply in comment.reply_set.all %}
         <div class="reply">
             <div class="reply-text">
-                {{reply.text}}
+                <p>{{reply.text | safe | linebreaks}}</p>
             </div>
             <footer class="reply-footer">
                 <div>
@@ -112,6 +112,14 @@
                     (updated {{reply.last_updated}})
                 {% endif %}
                 </div>
+
+            {% if reply.user == user %}
+                <a class="buttons" href="{% url 'replies:update' pk=reply.pk %}">Update</a>
+                <button type="button" class="buttons reply-delete-button">Delete</button>
+                    <div class="reply-del-container" hidden>
+                        {% include 'replies/reply_delete.html' %}
+                    </div>
+            {% endif %}
             </footer>
         </div>
         {% endfor %}
@@ -140,43 +148,45 @@
 
 </div>
 
-    <script>
-        let button = document.querySelector(".moderator-actions");
-        let allButtons = document.querySelector(".moderator-buttons");
-        allButtons.style.display = "none";
+<script>
 
+    let button = document.querySelector(".moderator-actions");
+    let allButtons = document.querySelector(".moderator-buttons");
+
+    if (allButtons && button){
+        allButtons.style.display = "none";
         button.addEventListener("mouseover", showOrderMenu);
         button.addEventListener("mouseout", hideOrderMenu);
         allButtons.addEventListener("mouseover", showOrderMenu);
         allButtons.addEventListener("mouseout", hideOrderMenu);
+    }
 
-        function showOrderMenu(){
-            allButtons.style.display = "grid";
+    function showOrderMenu(){
+        allButtons.style.display = "grid";
+    }
+
+    function hideOrderMenu(){
+        allButtons.style.display = "none";
+    }
+
+    let toggleButton = document.querySelector(".toggle-reply");
+    let replyList = document.querySelector(".reply-list");
+    replyList.style.display = "grid";
+    toggleButton.addEventListener("click", toggleReplyList);
+
+    function toggleReplyList(){
+        if (replyList.style.display == "grid"){
+            replyList.style.display = "none";
+            toggleButton.innerHTML = "Show Replies"
         }
-
-        function hideOrderMenu(){
-            allButtons.style.display = "none";
+        else if (replyList.style.display == "none") {
+            replyList.style.display = "grid";
+            toggleButton.innerHTML = "Hide Replies"
         }
-
-        let toggleButton = document.querySelector(".toggle-reply");
-        let replyList = document.querySelector(".reply-list");
-        replyList.style.display = "grid";
-
-        toggleButton.addEventListener("click", toggleReplyList);
-
-        function toggleReplyList(){
-            if (replyList.style.display == "grid"){
-                replyList.style.display = "none";
-                toggleButton.innerHTML = "Show Replies"
-            }
-            else {
-                replyList.style.display = "grid";
-                toggleButton.innerHTML = "Hide Replies"
-            }
-        }
-    </script>
+    }
+</script>
 
 <script src="{% static 'posts/post.js' %}"></script>
 <script src="{% static 'comments/comment.js' %}"></script>
-
+<script src="{% static 'replies/reply.js' %}"></script>
 {% endblock %}

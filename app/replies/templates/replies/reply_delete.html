@@ -1,0 +1,27 @@
+{% load static %}
+
+<form
+  class="reply-delete-form"
+  method="post"
+  action="{% url 'replies:delete' pk=reply.pk %}"
+>
+  {% csrf_token %}
+  {{ form }}
+  <div class="form-buttons">
+    <input class="reply-form-delete-button" value="Delete" type="submit">
+    <button class="buttons reply-form-cancel-button" type="button">Cancel</button>
+  </div>
+</form>
+
+<script>
+    deleteReplyForm = document.querySelector(".reply-delete-form");
+    deleteReplyButton = document.querySelector(".reply-form-delete-button");
+
+    deleteReplyButton.addEventListener("click", submitReplyForm);
+
+  
+
+    function submitReplyForm(){
+        deleteReplyForm.submit();
+    }
+</script>
