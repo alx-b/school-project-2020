@@ -95,6 +95,10 @@ nav > a:hover {
     color: var(--font-color);
 }
 
+.top-bar > .buttons{
+    margin-left: 12px;
+}
+
 .buttons {
     font-size: 14px;
     background-color: #222;

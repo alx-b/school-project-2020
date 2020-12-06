@@ -82,7 +82,7 @@
             <div class="total-replies">
                 <div>{{comment.reply_set.count}} replies</div>
             </div>
-            <div>
+            <div class="comment-buttons">
                 {% if comment.reply_set.count > 0 %}
                 <button type="button" class="buttons toggle-reply">Hide Replies</button>
                 {% endif %}
@@ -112,14 +112,15 @@
                     (updated {{reply.last_updated}})
                 {% endif %}
                 </div>
-
+            <div class="reply-buttons">
             {% if reply.user == user %}
                 <a class="buttons" href="{% url 'replies:update' pk=reply.pk %}">Update</a>
                 <button type="button" class="buttons reply-delete-button">Delete</button>
                     <div class="reply-del-container" hidden>
                         {% include 'replies/reply_delete.html' %}
                     </div>
-            {% endif %}
+                    {% endif %}
+            </div>
             </footer>
         </div>
         {% endfor %}

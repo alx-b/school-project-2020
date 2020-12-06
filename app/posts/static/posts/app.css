@@ -164,6 +164,21 @@
     margin-top: 10px;
 }
 
+.comment-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.comment-buttons > .buttons {
+    background-color: #333;
+}
+
+.comment-buttons > .buttons:hover {
+    background-color: var(--btn-color);
+}
+
 .reply-list {
     display: grid;
     grid-gap: 6px;
@@ -188,4 +203,18 @@
      display: grid;
      grid-gap: 6px;
      font-size: 0.7rem;
+}
+
+.reply-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+.reply-buttons > .buttons {
+    background-color: #444;
+}
+
+.reply-buttons > .buttons:hover {
+    background-color: var(--btn-color);
 }
