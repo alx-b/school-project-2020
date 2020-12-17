@@ -3,7 +3,8 @@ FROM python:3.8-slim
 COPY ./requirements.txt /requirements.txt
 
 RUN pip install -r /requirements.txt \
- && mkdir -p /vol/static
+ && mkdir -p /vol/static \
+ && mkdir -p /vol/static/css
 
 WORKDIR /project
 
@@ -14,6 +15,8 @@ RUN chmod +x entrypoint.sh
 RUN useradd user \
  && chown -R user:user /vol \
  && chmod -R 755 /vol/static \
+ && chown -R user:user /vol/static/css \
+ && chmod -R 755 /vol/static/css \
  && chown -R user:user . \
  && chmod -R 755 .
 
